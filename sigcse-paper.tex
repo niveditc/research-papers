@@ -1,7 +1,4 @@
 \documentclass{sig-alternate}
-%\documentclass[11pt,letterpaper]{article}
-%\usepackage[margin=1in]{geometry}
-%\usepackage[doublespacing]{setspace}
 
 \setcopyright{acmcopyright}
 \usepackage{amsmath}
@@ -15,38 +12,25 @@
 \usepackage{tabularx}
 \usepackage{fancyvrb}
 
-\newcommand{\acmtitle}[0]{
+\begin{document}
+
 \title{Nipping Bugs in the Bud\\ Student Mistakes in Introductory Computer Science}
 \numberofauthors{3}
 \author{
 \alignauthor
 %Nivedita Chopra\\
- %      \affaddr{Carnegie Mellon University}\\
- %      \affaddr{Pittsburgh, PA}\\
- %     \email{niveditc@andrew.cmu.edu}
-%\additionalauthors{Additional authors: Robert Simmons (Carnegie Mellon University,
+%       \affaddr{Carnegie Mellon University}\\
+%      \affaddr{Pittsburgh, PA}\\
+%     \email{niveditc@andrew.cmu.edu}
+%     \additionalauthors{Additional authors: Robert Simmons (Carnegie Mellon University,
 %email: {\texttt{rjsimmon@cs.cmu.edu}}) and Roy Maxion
 %(Carnegie Mellon University, email: {\texttt{maxion@cs.cmu.edu}}).}
 }
 %\date{\today}
 \maketitle
-}
-
-\newcommand{\thesistitle}[0]{
-\title{\textbf{\Large{Nipping Bugs in the Bud\\ Student Mistakes in Introductory Computer Science}}}
-\author{Nivedita Chopra\\ Advisors : Roy Maxion and Robert Simmons}
-\date{}
-\maketitle
-\thispagestyle{empty}
-\clearpage
-}
-
-\begin{document}
-
-%\thesistitle
-\acmtitle
 
 \presetkeys{todonotes}{color=red!30}{}
+% TODO : Remove page numbers before submission
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
@@ -65,14 +49,14 @@
 \def\numedge{31 }
 
 \begin{abstract}
-Bugs in computer programs may be caused by mistakes in the programmer's thought process. Mitigating the causes of common mistakes in introductory computer science classes can help improve the quality of code that students write in future classes, as well as in industry or academia. We want to mitigate common mistakes made by students in our class by analyzing the bugs committed by students in the class, determining the mistakes in thought processes that caused these bugs, and devising ways to correct these mistakes by changing our teaching methods. We collected information about bugs committed by students, including a description of the bug, an optional code snippet, and the student's reasoning behind the bug. We then classified each bug according to a standard taxonomy (IEEE Standard Classification of Software Anomalies (2010)), determined the mistakes behind common bugs, and proposed ways to mitigate such mistakes. We found \numlogic logic bugs, \numdata data bugs, and \numinterface interface bugs per the IEEE standard. An additional category of bugs emerged that we called ``comprehension errors'' (\numcomp instances), which is unique to introductory computer science classes. Comprehension errors are caused by a misunderstanding of concepts, specifications, or error messages, and may prove useful in highlighting concepts that need to be explained better. 
+Bugs in computer programs may be caused by mistakes in the programmer's thought process. Mitigating the causes of common mistakes in introductory computer science classes can help improve the quality of code that students write in future classes, as well as in industry or academia. We want to mitigate common mistakes made by students in our class by analyzing the bugs committed by students in the class, determining the mistakes in thought processes that caused these bugs, and devising ways to correct these mistakes by changing our teaching methods. We collected information about bugs committed by students, including a description of the bug, an optional code snippet, and the student's reasoning behind the bug. We then classified each bug according to a standard taxonomy (IEEE Standard Classification of Software Anomalies (2010)), determined the mistakes behind common bugs, and proposed ways to mitigate such mistakes. We found \numlogic logic bugs, \numdata data bugs, and \numinterface interface bugs per the IEEE standard. An additional category of bugs emerged that we called ``comprehension errors'' (\numcomp instances), which is unique to introductory computer science classes. Comprehension errors are caused by a misunderstanding of concepts, specifications, or error messages, and may prove useful in highlighting concepts that need to be explained better.
 
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-Bugs are a major problem in software development, and bugs in software that is widely used can have far-reaching consequences, as was recently seen in the case of the Heartbleed bug in OpenSSL. While slips in syntax can be detected and fixed easily, oftentimes bugs are caused by mistakes in the programmer's thought process. For example, a student who has misunderstood the workings of pointer arithmetic may add the wrong quantity to a pointer, causing memory errors. Such mistakes ought to be detected and remedied early on, preferably in introductory and intermediate programming classes, to ensure that the programmers of tomorrow are much less likely to commit certain kinds of errors. 
+Bugs are a major problem in software development, and bugs in software that is widely used can have far-reaching consequences, as was recently seen in the case of the Heartbleed bug in OpenSSL. While slips in syntax can be detected and fixed easily, oftentimes bugs are caused by mistakes in the programmer's thought process. For example, a student who has misunderstood the workings of pointer arithmetic may add the wrong quantity to a pointer, causing memory errors. Such mistakes ought to be detected and remedied early on, preferably in introductory and intermediate programming classes, to ensure that the programmers of tomorrow are much less likely to commit certain kinds of errors.
 
 \section{Problem and Approach}
 Many mistakes that students make during the course of an introductory computer science course may not be corrected before the end of the semester. Thus students continue to make these mistakes, which may lead to them writing buggy code in higher-level classes and/or industry, where there is no longer a focus on basic computer science concepts.\\
@@ -86,7 +70,8 @@ In the 1980s, much research was aimed at examining bugs committed by students le
 
 Most of the work done in the 1980s focused on novice programmers who were learning to program for the first time \cite{SpohrerSoloway86, Pea86}. Our research focuses on students who already know how to program, having taken at least one semester-long programming class. Thus we focus on the students' understanding of algorithms and data structures, and other concepts they are learning for the first time. We also classify the bugs committed by students in the class in a broader sense and avoid focusing on details that are specific to our class and the language in which it is taught (C0 and C).\\
 
-Ko and Myers' work \cite{KoMyers03} classifies and describes errors in programming by linking the errors to their causes. Their model for programming errors is based on Reason's model \cite{Reason90}. Reason's model demonstrates that mistakes in applying knowledge and strategy cause the cognitive problems that lead to errors. Ko and Myers provide a broad taxonomy for errors seen in all types of programming, including both industry and education. Ko and Myers share our goal of connecting errors in programming to mistakes in the programmer's thought process. However, our research focuses on introductory programming classes, and we provide a taxonomy tailored for that purpose.\\
+%\todo[inline]{Got rid of Ko and Myers paragraph. Hope it transitions okay.}
+%Ko and Myers' work \cite{KoMyers03} classifies and describes errors in programming by linking the errors to their causes. Their model for programming errors is based on Reason's model \cite{Reason90}. Reason's model demonstrates that mistakes in applying knowledge and strategy cause the cognitive problems that lead to errors. Ko and Myers provide a broad taxonomy for errors seen in all types of programming, including both industry and education. Ko and Myers share our goal of connecting errors in programming to mistakes in the programmer's thought process. However, our research focuses on introductory programming classes, and we provide a taxonomy tailored for that purpose.\\
 
 Recently, some research has been done in introductory computer science classes to examine the problems that students face in these classes with an aim of alleviating student frustration and attrition \cite{BryceCooleyHansenHayrapetyan10}. They follow a similar method to ours, of asking students to fill in a form reporting their bugs, yet they differ from our research in two important aspects. Firstly, their classification of bugs is very detailed, with 20 disjoint categories, and focuses heavily on particular concepts and ideas covered in the class, so it is not applicable beyond their class without changes. Additionally, they do not examine student reasoning behind the bug, and classify bugs entirely based on the description and code for the bug.\\
 
@@ -98,7 +83,7 @@ Our research was performed in an introductory computer science class --- Princip
 \section{Method}
 \label{sec:method}
 
-We recorded bugs committed by the students in Principles of Imperative Computation (15-122) in Fall 2014. Each record of data contained a description of the bug, an optional snippet of the buggy code, and a short explanation by the student of the cause behind the committing of the bug. An example of a record of data is shown in Figure \ref{fig:record}.\\ 
+We recorded bugs committed by the students in Principles of Imperative Computation (15-122) in Fall 2014. Each record of data contained a description of the bug, an optional snippet of the buggy code, and a short explanation by the student of the cause behind the committing of the bug. An example of a record of data is shown in Figure \ref{fig:record}.\\
 
 \begin{figure}
 \begin{framed}
@@ -272,7 +257,7 @@ When learning a computer science concept, such as integer casting or pointer ari
 
 \textbf{Problem}\\
 Compute the offset as a signed 16 bit integer that is given as a two-byte operand	to the instruction. Instructions are stored in an array of (unsigned) bytes (\verb|ubyte *P|) \\
- 
+
 \textbf{Buggy solution}
 \begin{verbatim}
  int16_t o1 = (int16_t)(int8_t)P[pc+1];
@@ -287,7 +272,7 @@ Compute the offset as a signed 16 bit integer that is given as a two-byte operan
  int16_t offset = ((o1 << 8) | o2);
 \end{verbatim}
 
-\textbf{Comprehension error}\\ 
+\textbf{Comprehension error}\\
 Casts both \verb|o1| and \verb|o2| into signed integers to make resultant offset signed. Sign extension on \verb|o2| may alter the final quantity. This shows a misunderstanding of the concept of sign extension.
 
 \end{framed}
@@ -316,40 +301,40 @@ For the bugs that were frequently observed every week, we sought the student mis
 Type&Example : Instructions&Example : Buggy Code&Example : Correct Code\\ \hline
 Logic Bug
 %\emph{Defect in decision logic, branching, sequencing, or computational algorithm, as found in natural language specifications or in implementation language.}
-& 
+&
 Traverse through a linked list performing a certain	operation on each element
-& 
+&
 \begin{verbatim}
-while (li->next != NULL){   
+while (li->next != NULL){
  //do something;
- li = li->next; 
+ li = li->next;
 }
 \end{verbatim}
-& 
+&
 \begin{verbatim}
-while (li != NULL){   
+while (li != NULL){
  //do something;
- li = li->next; 
+ li = li->next;
 }
 \end{verbatim}\\
 \hline
 Data Bug
 %\emph{Defect in data definition, initialization, mapping, access or use as found in a model, specification or implementation.}
-& 
+&
 Write a function to check if a given integer is in a linked list
-& 
+&
 \begin{verbatim}
 bool is_in(list L, int n){
  while(L->start != NULL){
   if(L->start->data == n)
    return true;
-  L->start = 
+  L->start =
            L->start->next;
  }
  return false;
 }
 \end{verbatim}
-& 
+&
 \begin{verbatim}
 bool is_in(list L, int n){
  list temp = L->start;
@@ -362,7 +347,7 @@ bool is_in(list L, int n){
 }
 \end{verbatim}\\
 \hline
-Interface Bug & 
+Interface Bug &
 Write a function that removes the green component of a given pixel
 \vspace{0.11in}
 
@@ -370,45 +355,45 @@ Write a function that removes the green component of a given pixel
 \vspace{-0.11in}
 \begin{verbatim}
 pixel make_pixel(
-  int a, int r, 
+  int a, int r,
   int g, int b);
 int get_red(pixel p);
 \end{verbatim}
 
 \emph{Implementation}
 \verb|typedef int pixel;|
-& 
+&
 \begin{verbatim}
 pixel remove_red(pixel p){
    return (p & 0xFF0000);
 }
 \end{verbatim}
-& 
+&
 \begin{verbatim}
 pixel remove_red(pixel p){
    int a = get_alpha(p);
    int g = get_green(p);
    int b = get_blue(p);
-   return 
+   return
     make_pixel(a, 0, g, b);
 }
 \end{verbatim}\\
 \hline
-Comprehension Bug & 
+Comprehension Bug &
 Create the list containing 1, 2, and 4, in order, using the cons and nil functions
 
 \verb|list cons(int, list);|
 \verb|list nil();|
-& 
+&
 \begin{verbatim}
-list L = 
-  cons(1, cons(2, 
+list L =
+  cons(1, cons(2,
               cons(4)));
 \end{verbatim}
-& 
+&
 \begin{verbatim}
-list L = 
-  cons(1, cons(2, cons(4, 
+list L =
+  cons(1, cons(2, cons(4,
                   nil())));
 \end{verbatim}
 \\ \hline
@@ -417,7 +402,7 @@ list L =
 
 Based on our analysis, we propose a new taxonomy of bugs that occur in introductory computer science classes. This taxonomy has four main categories --- logic bugs, data bugs, interface bugs, and comprehension bugs. See Table 2 for examples of bugs classified by this taxonomy.\\
 
-In addition to the observation of comprehension bugs, we also noticed that a large percentage of bugs were logic bugs at the beginning of the semester, and in later weeks, the frequency of comprehension bugs began to increase. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts. It should be mentioned that some of the hardest topics, such as type casting and pointer arithmetic were taught near the end of the semester.\\
+In addition to the observation of comprehension bugs, we also noticed that a large percentage of bugs were logic bugs at the beginning of the semester, and in later weeks, the frequency of comprehension bugs began to increase. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts. It should be mentioned that some of the hardest topics, such as type casting and pointer arithmetic, were taught near the end of the semester.\\
 
 We also noticed that some bugs can be classified as per the IEEE classification into logic, data, or interface bugs when we look solely at the code. However, when we hear the student's reasoning behind the bug, we realize that they are actually comprehension bugs caused by a misconception harbored by the student. We noticed that six bugs that were initially classified as logic or data bugs (as per the IEEE standard) were later reclassified as comprehension bugs.\\
 
@@ -426,11 +411,11 @@ While traditional bug taxonomies classify the bugs into orthogonal categories ba
 We were able to record \numtotal bugs throughout the course of the semester. While it would have been ideal to be able to record a larger number of bugs committed by students taking the class \cite{BryceCooleyHansenHayrapetyan10}, we lacked the resources to perform such widespread data collection.
 
 \section{Further Work}
-It might be useful to get a larger subset of data about bugs seen in the class. One way to do this can be requiring students to complete a form about their problem before and after recieving help at office hours, which is where teaching assistants provide one-on-one help with the programming assignments. Not only will this give us a reliable and larger data source, but it can also help improve the student and TA experience at office hours. Firstly, requiring students to document their problem before recieving help can help discourage many vague questions that TAs often get about the assignment, and force students to think harder about the assignment before asking for help. Secondly, asking students to include their code in the report, can allow the TAs to download the code on their own computer which may help them determine the bug more easily.\\
+It might be useful to get a larger subset of data about bugs seen in the class. One way to do this can be requiring students to complete a form about their problem before and after recieving help at office hours, where teaching assistants provide one-on-one help with programming assignments. Not only will this give us a reliable and larger data source, but it can also help improve the student and teaching assistant experience at office hours. Firstly, requiring students to document their problem before recieving help can help discourage many vague questions that teaching assistants often get about the assignment, and force students to think harder about the assignment before asking for help. Secondly, asking students to include their code in the report, can allow the teaching assistants to download the code on their own computer which may help them determine the bug more easily.\\
 
 Since conceptual bugs are more widely seen near the end of the semester, it would be useful to do a more in-depth analysis of these bugs. This could give an insight into concepts that may need to be emphasized in lectures, quizzes, etc.\\
 
-A way to programmatically ascertain whether a given snippet of code contains a logic, data, interface or comprehension error, can help teaching assistants to provide better quality of help to students. This can also be adapted into a system that will provide a student with hints about their error when the student inputs their code and reasoning. Similar tutors have been created for helping novice programmers. They analyze the student code to determine whether the code contains the appropriate algorithms and program components for a given problem, and provides hints based on which components are missing or incorrect \cite{Sudol-DeLyser14}. While this approach works well for analyzing novice code, as we mentioned in Section \ref{sec:analysis}, it's important to also take into account the student's reasoning behind the bug, as the same snippet of buggy code can be written due to different reasons.\\
+A way to programmatically ascertain whether a given snippet of code contains a logic, data, interface or comprehension error, can help teaching assistants to provide better quality of help to students. This can also be adapted into a system that will provide a student with hints about their error when the student inputs their code and reasoning. Similar tutors have been created for helping novice programmers. They analyze the student code to determine whether the code contains the appropriate algorithms and program components for a given problem, and provides hints based on which components are missing or incorrect \cite{Sudol-DeLyser14}. While this approach works well for analyzing novice code, as we discussed in Section \ref{sec:analysis}, it's important to also take into account the student's reasoning behind the bug, as the same snippet of buggy code can be written due to different reasons.\\
 
 Another idea would be to correlate student grades and performance with the bugs that the students commit. This might help us predict future performance for students if we know the kind of bugs that they are likely to commit in the future.\\
 
@@ -444,4 +429,3 @@ In this paper, we aimed to take some first steps towards mitigating mistakes in 
 \bibliography{mybib}
 \balancecolumns
 \end{document}
-
