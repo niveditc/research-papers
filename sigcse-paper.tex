@@ -35,17 +35,17 @@
 \pagenumbering{arabic}
 
 % IEEE bug counts
-\def\numlogicIEEE{66 }
-\def\numdataIEEE{24 }
-\def\numinterfaceIEEE{7 }
-\def\numotherIEEE{26 }
+\def\numlogicIEEE{64 }
+\def\numdataIEEE{30 }
+\def\numinterfaceIEEE{5 }
+\def\numotherIEEE{27 }
 
 % Final bug counts
-\def\numlogic{63 }
-\def\numdata{21 }
-\def\numinterface{7 }
-\def\numcomp{32 }
-\def\numtotal{123 }
+\def\numlogic{61 }
+\def\numdata{27 }
+\def\numinterface{5 }
+\def\numcomp{33 }
+\def\numtotal{126 }
 \def\numedge{31 }
 
 \begin{abstract}
@@ -407,11 +407,21 @@ list L =
 
 In addition to the observation of comprehension bugs, we also noticed that a large percentage of bugs were logic bugs at the beginning of the semester, and in later weeks, the frequency of comprehension bugs began to increase. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts. It should be mentioned that many hard topics, such as type casting and pointer arithmetic, were taught near the end of the semester.\\
 
+In addition to the observation of comprehension bugs, we also noticed that a large percentage of bugs were logic bugs at the beginning of the semester, and in later weeks, the frequency of comprehension bugs began to increase, as shown in Figure \ref{fig:types}. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts. It should be mentioned that some of the hardest topics, such as type casting and pointer arithmetic, were taught near the end of the semester.\\
+
 We also noticed that some bugs can be classified as per the IEEE classification into logic, data, or interface bugs when we look solely at the code. However, when we hear the student's reasoning behind the bug, we realize that they are actually comprehension bugs caused by a misconception harbored by the student. As mentioned in Section \ref{sec:method}, six bugs that were initially classified as logic or data bugs (as per the IEEE standard) were later reclassified as comprehension bugs. Figure \ref{fig:incorrect} is an example of a bug that was reclassified.\\
 
 While traditional bug taxonomies classify the bugs into orthogonal categories based on a description of the bug (in code or as documentation) \cite{Beizer90}, our taxonomy requires additional information about the student's reasoning in order to decide whether a bug is a comprehension bug. Hence the classification of comprehension bugs is dependent  on the availability of additional information, and shows that when classifying bugs in introductory computer science classes, it is not sufficient to record just the bug itself. In such a setting, it is equally, if not more, important to also record the student's understanding of the bug.\\
 
 We were able to record \numtotal bugs throughout the course of the semester. While it would have been ideal to be able to record a larger number of bugs committed by students taking the class \cite{BryceCooleyHansenHayrapetyan10}, we lacked the resources to perform such widespread data collection.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.41]{figures/types.png}
+\caption{Recorded bugs, split by type and time}
+\label{fig:types}
+\end{figure}
+
 
 \section{Further Work}
 It might be useful to get a larger set of data about bugs seen in the class. One way to do this can be requiring students to complete a form about their problem before and after recieving help at office hours, where teaching assistants provide one-on-one help with programming assignments. Not only will this give us a reliable and larger data source, but it can also help improve the student and teaching assistant experience at office hours. Firstly, requiring students to document their problem before recieving help can help discourage many vague questions that teaching assistants often get about the assignment, and force students to think harder about the assignment before asking for help. Secondly, asking students to include their code in the report, can allow the teaching assistants to download the code on their own computer which may help them determine the bug more easily.\\
