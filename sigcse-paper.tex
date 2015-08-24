@@ -143,7 +143,7 @@ We recorded bugs committed by the students taking the class in Fall 2014. Each r
 
 Bugs were obtained and recorded in the following ways:
 \begin{itemize}
-\item{\textbf{Google form.} Students were asked to fill an online form when they found and fixed a bug. In addition to the data points mentioned above, data from this source also contained information on how much time it took the student to find and fix their bug, how they found the bug, and suggestions for how the course staff may have done better in this regard.}
+\item{\textbf{Google form.} Students were asked to fill an online form when they found and fixed a bug. In addition to the data points mentioned above, data from this source also contained information on how much time it took the student to find and fix their bug, how they found the bug, and suggestions for things the course staff may have done to prevent them from committing the bug or to help them fix it faster.}
 
 \item{\textbf{Student observation.} We observed students in labs and office hours and took note of the bugs committed by students in those settings. When students fixed their bugs, usually with our help, we asked them to explain their bug and their reasoning behind what caused them to commit the bug.}
 \item{\textbf{Piazza.} We analyzed posts made in the online Q\&A forum, Piazza, and recorded the bugs seen there. These posts included a description and/or code pertaining to the bug, and a discussion that led to the bug being solved. Some of the data from this source did not contain student reasoning behind the bug.}
@@ -224,12 +224,12 @@ Casts both \verb|o1| and \verb|o2| into signed integers to make resultant offset
 
 \end{framed}
 \vspace{-0.1in}
-\caption{Comprehension error due to lack of clarity on a concept}
+\caption{Comprehension error due to lack of clarity on the concept of sign extension}
 \label{fig:comp2}
 \end{figure}
 
 \subsection{Misunderstanding error messages}
-Due to having limited prior programming experience and possibly because they are using new tools, students are often stumped by error messages and warnings, from the compiler and the autograder. Figure \ref{fig:comp3} illustrates a comprehension error that is caused by misunderstanding an error message.
+Due to having limited prior programming experience and possibly because they are using new tools, students are often stumped by error messages and warnings, from the compiler and the autograder\footnote{In this class we grade student code using an online autograder called Autolab}. Figure \ref{fig:comp3} illustrates a comprehension error that is caused by misunderstanding an error message.
 
 \begin{figure}
 \begin{framed}
@@ -407,13 +407,7 @@ The student misunderstood the specification and thought that modifying the linke
 \label{fig:incorrect}
 \end{figure}
 
-In addition to the observation of comprehension bugs, we also noticed that a large percentage of bugs were logic bugs at the beginning of the semester, and in later weeks, the frequency of comprehension bugs began to increase, as shown in Figure \ref{fig:types}. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts, since some of the hardest topics, such as type casting and pointer arithmetic, were taught near the end of the semester.\\
-
-We also noticed that some bugs can be classified as per the IEEE classification into logic, data, or interface bugs when we look solely at the code. However, when we take into account the student's reasoning behind the bug, we realize that these are actually comprehension bugs caused by a misconception harbored by the student. As mentioned in Section \ref{sec:method}, six bugs that were initially classified as logic or data bugs (as per the IEEE standard) were later reclassified as comprehension bugs. Figure \ref{fig:incorrect} is an example of a bug that was reclassified.\\
-
-While traditional bug taxonomies classify the bugs into orthogonal categories based on a description of the bug (in code or as documentation) \cite{Beizer90}, our taxonomy requires additional information about the student's reasoning in order to decide whether a bug is a comprehension bug. Hence the classification of comprehension bugs is dependent  on the availability of additional information, and shows that when classifying bugs in introductory computer science classes, it is not sufficient to record just the bug itself. In such a setting, it is equally, if not more, important to also record the student's understanding of the bug.\\
-
-We were able to record \numtotal bugs throughout the course of the semester. While it would have been ideal to be able to record a larger number of bugs committed by students taking the class \cite{BryceCooleyHansenHayrapetyan10}, we lacked the resources to perform such widespread data collection.
+In the first half of the semester, the biggest category of bugs was logic bugs, while in the second half, comprehension bugs outnumber the logic bugs, as can be seen in Figure \ref{fig:types}. The increasing frequency of comprehension bugs as the semester progressed seems to indicate a correlation with the introduction of new and difficult concepts, since some of the hardest topics, such as type casting and pointer arithmetic, were taught near the end of the semester.\\
 
 \begin{figure}
 \centering
@@ -421,6 +415,12 @@ We were able to record \numtotal bugs throughout the course of the semester. Whi
 \caption{Recorded bugs, split by type and time}
 \label{fig:types}
 \end{figure}
+
+Some bugs can be classified as per the IEEE classification into logic, data, or interface bugs when we look solely at the code. However, when we take into account the student's reasoning behind the bug, we realize that these are actually comprehension bugs. As mentioned in Section \ref{sec:method}, six bugs that were initially classified as logic or data bugs (as per the IEEE standard) were later reclassified as comprehension bugs. Figure \ref{fig:incorrect} is an example of a bug that was reclassified.\\
+
+Thus, while traditional bug taxonomies classify the bugs into orthogonal categories based on a description of the bug (in code or as documentation) \cite{Beizer90}, our taxonomy requires additional information about the student's reasoning in order to decide whether a bug is a comprehension bug. This shows that when classifying bugs in introductory computer science classes, it is not sufficient to record just the bug itself. It is equally, if not more, important to also record the student's understanding of the bug.\\
+
+We were able to record \numtotal bugs throughout the course of the semester. While it would have been ideal to be able to record a larger number of bugs committed by students taking the class \cite{BryceCooleyHansenHayrapetyan10}, we lacked the resources to perform such widespread data collection.
 
 
 \section{Further Work}
@@ -430,11 +430,11 @@ Given our aim of using this taxonomy as a basis for a formal discussion of bugs 
 
 Consistent with our other aim of formulating plans to better prepare students to deal with such errors, we now provide some suggestions on how this research can help improve the quality of a class.\\
 
-A way to programmatically ascertain whether a given snippet of code contains a logic, data, interface or comprehension error, can help teaching assistants to provide better quality of help to students. This can also be adapted into a system that will provide a student with hints about their error when the student inputs their code and reasoning. Similar tutors have been created for helping novice programmers. They analyze the student code to determine whether the code contains the appropriate algorithms and program components for a given problem, and provides hints based on which components are missing or incorrect \cite{Sudol-DeLyser14}. While this approach works well for analyzing novice code, as we discussed in Section \ref{sec:analysis}, it's important to also take into account the student's reasoning behind the bug, as the same snippet of buggy code can be written due to different reasons.\\
+A system that would provide students hints about their error based on their code and reasoning can help students find and fix their bugs more easily. Similar tutors have been developed for novice programmers, which analyze student code to determine whether it contains the appropriate algorithms and program components for a given problem, and provide hints based on which components are missing or incorrect \cite{Sudol-DeLyser14}. By taking into account student reasoning, our proposed tutor may diagnose student error more effectively.\\
 
-Since conceptual bugs are more widely seen near the end of the semester, it would be useful to do a more in-depth analysis of these bugs. This could give an insight into concepts that may need to be emphasized in lectures.\\
+An in-depth analysis of comprehension errors committed by students in the class can help determine concepts that need to be explained better in lectures.\\
 
-Another idea is to correlate student grades and performance with the bugs that the students commit. This might help us predict future performance for students if we know the kind of bugs that they are likely to commit in the future.
+Correlating student grades and performance with the bugs that they commit may help us to predict the performance of individual students, based on patterns from previous semesters.
 
 \section{Conclusion}
 
