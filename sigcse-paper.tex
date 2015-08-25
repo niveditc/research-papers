@@ -12,6 +12,11 @@
 \usepackage{tabularx}
 \usepackage{fancyvrb}
 
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\floatpagefraction}{0.75}
+
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
 \begin{document}
@@ -140,56 +145,8 @@ the class in a broader sense and avoid focusing on details that are
 specific to our class and the language in which it is taught
 \cite{Arnold10}.\\
 
-Ko and Myers' work \cite{KoMyers03} classifies and describes errors in
-programming by linking the errors to their causes. Their model for
-programming errors is based on Reason's model \cite{Reason90}.
-Reason's model demonstrates that mistakes in applying knowledge and
-strategy cause the cognitive problems that lead to errors. Ko and
-Myers provide a broad taxonomy for errors seen in all types of
-programming, including both industry and education. Ko and Myers share
-our goal of connecting errors in programming to mistakes in the
-programmer's thought process. However, our research focuses on
-introductory programming classes, and we provide a taxonomy tailored
-for that purpose.\\
-
-Recently, Bryce et al. studied bugs in introductory computer science
-classes to examine the problems that students face in these classes
-with the aim of alleviating student frustration and attrition
-\cite{BryceCooleyHansenHayrapetyan10}. They followed a method similar
-to ours, of asking students to fill in a form reporting their bugs,
-yet they differ from our research in two important aspects. First,
-their classification of bugs is very detailed, with 20 disjoint
-categories, and focuses heavily on particular concepts and ideas
-covered in the class, so it is not applicable beyond their class
-unless changes are made.  Second, they do not examine student
-reasoning behind the bug; they classify bugs based entirely on the
-description and code for the bug.\\
-
-For the purposes of our research, we distinguished between bugs, which
-are errors based on flawed knowledge, and slips, which are errors
-based on ``random noise'' \cite{VanLehn90}. While programming, slips
-are usually manifested as syntax errors and some other errors that may
-cause a program to fail compilation. On the other hand, bugs are
-caused by mistakes in the programmer's thought process. In our
-research, we consider only bugs and we ignore slips entirely. This is
-because slips in programming may be self-correcting, since they almost
-always cause compile errors which may be easily fixed by the
-programmer.\\
-
-Our research was performed in an introductory computer science class,
-taught in a small safe subset of the C programming language
-\cite{Arnold10}, and in C. The class introduces computer science
-students to basic algorithms such as searching and sorting, data
-structures such as lists, stacks, queues, heaps, trees, etc. and
-computational ideas such as complexity analysis and proof of
-correctness of code.
-
 %-----------------------------------------------------------------
-\section{Method}
-\label{sec:method}
-%-----------------------------------------------------------------
-
-\begin{table*}
+\begin{table*}[t]
 \def\arraystretch{1.6}
 \centering
 \caption{Error classification by type as per the IEEE Standard Classification for Software Anomalies \cite{IEEE10}}
@@ -226,6 +183,57 @@ Defect with no defined type.
 \\ \hline
 \end{tabular}
 \end{table*}
+%-----------------------------------------------------------------
+
+Ko and Myers' work \cite{KoMyers03} classifies and describes errors in
+programming by linking the errors to their causes. Their model for
+programming errors is based on Reason's model \cite{Reason90}.
+Reason's model demonstrates that mistakes in applying knowledge and
+strategy cause the cognitive problems that lead to errors. Ko and
+Myers provide a broad taxonomy for errors seen in all types of
+programming, including both industry and education. Ko and Myers share
+our goal of connecting errors in programming to mistakes in the
+programmer's thought process. However, our research focuses on
+introductory programming classes, and we provide a taxonomy tailored
+for that purpose.\vspace{8pt}
+
+Recently, Bryce et al. studied bugs in introductory computer science
+classes to examine the problems that students face in these classes
+with the aim of alleviating student frustration and attrition
+\cite{BryceCooleyHansenHayrapetyan10}. They followed a method similar
+to ours, of asking students to fill in a form reporting their bugs,
+yet they differ from our research in two important aspects. First,
+their classification of bugs is very detailed, with 20 disjoint
+categories, and focuses heavily on particular concepts and ideas
+covered in the class, so it is not applicable beyond their class
+unless changes are made.  Second, they do not examine student
+reasoning behind the bug; they classify bugs based entirely on the
+description and code for the bug.\vspace{8pt}
+
+For the purposes of our research, we distinguished between bugs, which
+are errors based on flawed knowledge, and slips, which are errors
+based on ``random noise'' \cite{VanLehn90}. While programming, slips
+are usually manifested as syntax errors and some other errors that may
+cause a program to fail compilation. On the other hand, bugs are
+caused by mistakes in the programmer's thought process. In our
+research, we consider only bugs and we ignore slips entirely. This is
+because slips in programming may be self-correcting, since they almost
+always cause compile errors which may be easily fixed by the
+programmer.\vspace{8pt}
+
+Our research was performed in an introductory computer science class,
+taught in a small safe subset of the C programming language
+\cite{Arnold10}, and in C. The class introduces computer science
+students to basic algorithms such as searching and sorting, data
+structures such as lists, stacks, queues, heaps, trees, etc. and
+computational ideas such as complexity analysis and proof of
+correctness of code.
+
+
+%-----------------------------------------------------------------
+\section{Method}
+\label{sec:method}
+%-----------------------------------------------------------------
 
 We recorded bugs committed by the students taking the class in Fall
 2014. Each record of data contained a description of the bug, an
@@ -295,6 +303,31 @@ categorized as other errors, with no defined type. Three logic errors
 and three data errors were later reclassified as comprehension errors
 (Section \ref{sec:comprehension}).\\
 
+%-----------------------------------------------------------------
+\begin{figure}
+\begin{framed}
+\setlength{\parindent}{0cm}
+\textbf{Problem}\\
+Create the list containing 1, 2, and 4, in order, using the \texttt{cons} and \texttt{nil} functions.\\
+
+\texttt{list cons(int, list); /* Adds the integer to the beginning of the list */\\ list nil(); /* Creates a new empty list */}\\
+
+\textbf{Buggy student solution}\\
+\texttt{list L = cons(1, cons(2, cons(4)));}\\
+
+\textbf{Correct solution}\\
+\texttt{list L = cons(1, cons(2, cons(4, nil())));}\\
+
+\textbf{Comprehension error}\\
+Misunderstanding the specification of \texttt{cons} and \texttt{nil}.
+\end{framed}
+\vspace{-0.1in}
+\caption{Comprehension error due to misunderstanding specifications}
+\label{fig:comp1}
+\end{figure}
+%-----------------------------------------------------------------
+
+
 None of our bugs fell into the other three categories of the IEEE
 standard --- syntax error, description error and standards error. As
 explained in Section \ref{sec:background}, syntax errors are slips by
@@ -311,6 +344,7 @@ category of the IEEE standard as ``comprehension errors,'' which are
 described in the next section.
 
 %-----------------------------------------------------------------
+\newpage
 \section{Comprehension Errors}
 \label{sec:comprehension}
 %-----------------------------------------------------------------
@@ -349,45 +383,6 @@ error that is caused by a misunderstanding of the specifications.
 \begin{framed}
 \setlength{\parindent}{0cm}
 \textbf{Problem}\\
-Create the list containing 1, 2, and 4, in order, using the \texttt{cons} and \texttt{nil} functions.\\
-
-\texttt{list cons(int, list); /* Adds the integer to the beginning of the list */\\ list nil(); /* Creates a new empty list */}\\
-
-\textbf{Buggy student solution}\\
-\texttt{list L = cons(1, cons(2, cons(4)));}\\
-
-\textbf{Correct solution}\\
-\texttt{list L = cons(1, cons(2, cons(4, nil())));}\\
-
-\textbf{Comprehension error}\\
-Misunderstanding the specification of \texttt{cons} and \texttt{nil}.
-\end{framed}
-\vspace{-0.1in}
-\caption{Comprehension error due to misunderstanding specifications}
-\label{fig:comp1}
-\end{figure}
-%-----------------------------------------------------------------
-
-
-%----------------------------------------
-\subsection{Lacking clarity on a concept}
-\label{sec:comp2}
-%----------------------------------------
-
-Often students may not fully grasp certain aspects of computer science
-concepts, especially those that they have recently learned. They may
-misunderstand the use cases of certain algorithms and paradigms,
-leading to bugs such as searching for an element in an unsorted array
-using binary search (which works only on sorted arrays). Figure
-\ref{fig:comp2} illustrates a comprehension error that was caused by
-lack of clarity on a concept.
-
-
-%-----------------------------------------------------------------
-\begin{figure}
-\begin{framed}
-\setlength{\parindent}{0cm}
-\textbf{Problem}\\
 
 Compute the offset as a signed 16 bit integer that is given as a
 two-byte operand to the instruction. Instructions are stored in an
@@ -420,8 +415,25 @@ extension.
 \vspace{-0.1in}
 \caption{Comprehension error due to lack of clarity on the concept of sign extension}
 \label{fig:comp2}
+
 \end{figure}
 %-----------------------------------------------------------------
+
+
+%----------------------------------------
+\subsection{Lacking clarity on a concept}
+\label{sec:comp2}
+%----------------------------------------
+
+Often students may not fully grasp certain aspects of computer science
+concepts, especially those that they have recently learned. They may
+misunderstand the use cases of certain algorithms and paradigms,
+leading to bugs such as searching for an element in an unsorted array
+using binary search (which works only on sorted arrays). Figure
+\ref{fig:comp2} illustrates a comprehension error that was caused by
+lack of clarity on a concept.
+
+
 
 
 %-------------------------------------------
@@ -487,8 +499,76 @@ comprehension errors. Examples of these bugs can be seen in Table
 \ref{table:new-taxonomy}.\\
 
 
+
+
+For the bugs that were frequently observed every week, we sought the
+student misconceptions that may have led to each bug. Since we
+possessed a timestamp for each bug recorded, we could pinpoint the
+context in which the bug was made, based on the material covered and
+assignments due at that time. The reasoning provided by the
+student, as described in the data collection process in Section
+\ref{sec:method}, often gave us an insight into the misconception that
+caused them to commit that bug. Where the student reasoning behind a
+bug was unclear, or where we didn't possess a record of student
+reasoning, we employed the method of ``just-so stories,''
+\cite{JoniSolowayGoldmanEhrlich83} which tries to reconstruct the
+thought process that may have led to a particular bug, and provides a
+convincing hypothesis about the student misconception that led to a
+particular bug. It is worth highlighting the dangers of using the
+``just-so'' method to determine student misconceptions from their
+code. Multiple chains of reasoning may lead to the same bug, as
+highlighted in Figure \ref{fig:incorrect}, and this may cause the bug
+to be classified incorrectly.\\
+
+
 %-----------------------------------------------------------------
-\begin{table*}
+\begin{figure}
+\begin{framed}
+\setlength{\parindent}{0cm}
+\textbf{Problem}\\
+Write a function to check if an integer is in a linked list.\\
+
+\textbf{Buggy student code}
+\vspace{-0.05in}
+\begin{verbatim}
+bool is_in(list L, int n) {
+ while (L->start != NULL) {
+  if (L->start->data == n) return true;
+  L->start = L->start->next;
+ }
+ return false;
+}
+\end{verbatim}
+
+\textbf{Reasoning 1}\\
+
+The student is modifying the linked list during traversal, so this is
+a data bug because data is being modified incorrectly.\\
+
+\textbf{Reasoning 2 (Actual)}\\
+
+The student misunderstood the specification and thought that modifying
+the linked list was okay. Thus, this is a comprehension error.
+
+\end{framed}
+\vspace{-0.1in}
+\caption{Multiple reasonings for same problem, as per the ``just-so'' method.}
+\label{fig:incorrect}
+\end{figure}
+%-----------------------------------------------------------------
+
+
+In the first half of the semester, the biggest category of bugs was
+logic bugs, while in the second half, comprehension bugs outnumbered the
+logic bugs, as can be seen in Figure \ref{fig:types}. The increasing
+frequency of comprehension bugs as the semester progressed correlates
+with the introduction of new and difficult concepts, since some of the
+hardest topics, such as type casting and pointer arithmetic, were
+taught near the end of the semester.\\
+
+
+%-----------------------------------------------------------------
+\begin{table*}[t]
 \def\arraystretch{1.75}
 \centering
 \caption{Proposed Bug Taxonomy}
@@ -602,73 +682,6 @@ cons(1, cons(4, nil())));
 \end{table*}
 %-----------------------------------------------------------------
 
-
-For the bugs that were frequently observed every week, we sought the
-student misconceptions that may have led to each bug. Since we
-possessed a timestamp for each bug recorded, we could pinpoint the
-context in which the bug was made, based on the material covered and
-assignments due at that time. The reasoning provided by the
-student, as described in the data collection process in Section
-\ref{sec:method}, often gave us an insight into the misconception that
-caused them to commit that bug. Where the student reasoning behind a
-bug was unclear, or where we didn't possess a record of student
-reasoning, we employed the method of ``just-so stories,''
-\cite{JoniSolowayGoldmanEhrlich83} which tries to reconstruct the
-thought process that may have led to a particular bug, and provides a
-convincing hypothesis about the student misconception that led to a
-particular bug. It is worth highlighting the dangers of using the
-``just-so'' method to determine student misconceptions from their
-code. Multiple chains of reasoning may lead to the same bug, as
-highlighted in Figure \ref{fig:incorrect}, and this may cause the bug
-to be classified incorrectly.\\
-
-
-%-----------------------------------------------------------------
-\begin{figure}
-\begin{framed}
-\setlength{\parindent}{0cm}
-\textbf{Problem}\\
-Write a function to check if an integer is in a linked list.\\
-
-\textbf{Buggy student code}
-\vspace{-0.05in}
-\begin{verbatim}
-bool is_in(list L, int n) {
- while (L->start != NULL) {
-  if (L->start->data == n) return true;
-  L->start = L->start->next;
- }
- return false;
-}
-\end{verbatim}
-
-\textbf{Reasoning 1}\\
-
-The student is modifying the linked list during traversal, so this is
-a data bug because data is being modified incorrectly.\\
-
-\textbf{Reasoning 2 (Actual)}\\
-
-The student misunderstood the specification and thought that modifying
-the linked list was okay. Thus, this is a comprehension error.
-
-\end{framed}
-\vspace{-0.1in}
-\caption{Multiple reasonings for same problem, as per the ``just-so'' method.}
-\label{fig:incorrect}
-\end{figure}
-%-----------------------------------------------------------------
-
-
-In the first half of the semester, the biggest category of bugs was
-logic bugs, while in the second half, comprehension bugs outnumbered the
-logic bugs, as can be seen in Figure \ref{fig:types}. The increasing
-frequency of comprehension bugs as the semester progressed correlates
-with the introduction of new and difficult concepts, since some of the
-hardest topics, such as type casting and pointer arithmetic, were
-taught near the end of the semester.\\
-
-
 %-----------------------------------------------------------------
 \begin{figure}
 \centering
@@ -705,6 +718,7 @@ perform such widespread data collection.
 
 
 %-----------------------------------------------------------------
+\newpage
 \section{Further Work}
 %-----------------------------------------------------------------
 
@@ -723,6 +737,7 @@ code in the report will allow the teaching assistants to download the
 code on their own computer, which may help them diagnose the bug more
 easily and correctly.\\
 
+\newpage
 Given our aim of using this taxonomy as a basis for a formal
 discussion of bugs seen in the class, it is important to judge how
 well a course staff can categorize bugs according to this taxonomy. We
@@ -773,7 +788,7 @@ introductory computer science classes, and insights on how this
 taxonomy can provide a basis for initiatives that will reduce the time
 and effort that it takes to diagnose and fix these bugs.
 
-
+\newpage
 \bibliographystyle{abbrv}
 \bibliography{mybib}
 \balancecolumns
