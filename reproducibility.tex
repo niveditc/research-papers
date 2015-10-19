@@ -1,0 +1,201 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{ textcomp }
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\usepackage{graphicx}
+
+\oddsidemargin0cm
+\topmargin-2cm
+\textwidth16.5cm
+\textheight23.5cm
+
+\newcommand{\topic}[1] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1} \vspace{0.5em}
+\hrule \vspace{.10in}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+
+\begin{document}
+\begin{center}
+\textbf{\large Reproducibilty study for Bug Taxonomy}
+
+{\small Nivedita Chopra, Robert Simmons}
+\end{center}
+
+\topic{Bug categories}
+
+\vspace{0.1in}
+
+\textbf{Logic Error}\\
+Logic errors are defects in decision logic, branching, sequencing, or computational algorithm, as found in natural language specifications or in implementation language.\\
+e.g. Incorrect sequencing of code statements, missing cases, performing the wrong operation, etc.\\
+
+\textbf{Data Error}\\
+Data errors are defects in data definition, initialization, mapping, access or use as found in a model, specification or implementation.\\
+e.g. Failure to initialize a variable, modifying data structures during non-destructive operations, dereferencing null, etc.\\
+
+\textbf{Interface Error}\\
+Interface errors are defects in specification or implementation of an interface.\\
+e.g. Use of implementation functions in client code, writing an implementation that does not conform to the interface, etc.\\
+
+\textbf{Comprehension Error}\\
+Comprehension errors are errors caused by student misconceptions. We usually detect these errors when student reasoning indicates that they misread the specification or didn't have a clear understanding of a concept. Students also commit comprehension errors when they are stumped by error messages or unsure of the right use case of a paradigm or algorithm.\\
+e.g. Using binary search on an unsorted array (either because they misunderstood the use case of binary search or because they incorrectly assumed that the input array is sorted).
+
+\topic{Please categorize the following bugs into one of the four categories. Remember to look at the student reasoning and not just at the code!}
+
+\begin{table}[h]
+\def\arraystretch{1.5}
+\begin{tabular}{|p{3.5in}|p{2.75in}|} \hline
+\textbf{Student Code} & \textbf{Student Reasoning}\\
+\hline
+
+\begin{verbatim}
+while (li->next != NULL) {
+ //do something;
+ li = li->next;
+}
+\end{verbatim}
+&
+\vspace{0.05in}
+I thought I should always check the next node.\\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+\begin{table}
+\def\arraystretch{1.5}
+\begin{tabular}{|p{3.75in}|p{2.75in}|} \hline
+
+\begin{verbatim}
+list L = cons(1, cons(2, cons(4)));
+\end{verbatim}&
+\vspace{0.05in}
+I didn't think about what cons expects and what cons does.
+\\
+\hline
+
+\begin{verbatim}
+if (B->start->prev != NULL) return false;
+if (B->end->next != NULL) return false;
+\end{verbatim}
+&
+I didn't realize that accessing unspecified fields is unsafe. \\
+\hline
+
+\begin{verbatim}
+char* a = &(bc0->string_pool[index]);
+push(S, VAL(INT(a));
+\end{verbatim}
+&
+\vspace{0.05in}
+I didn't realize that you were pushing the address onto the stack, instead thought I had to VAL it, etc.\\
+
+\hline
+
+\begin{verbatim}
+while (index != NULL) {
+ //DO SOMETHING
+ //Conspicuously missing index = index->next
+}
+\end{verbatim}&
+\vspace{0.05in}
+I was rushing because lab assignments are really easy.\\
+
+\hline
+
+\begin{verbatim}
+bool is_in(list L, int n) {
+ while (L->start != NULL) {
+  if (L->start->data == n) return true;
+  L->start = L->start->next;
+ }
+ return false;
+}
+\end{verbatim}&
+\vspace{0.05in}
+I thought that we can change the linked list.\\
+\hline
+
+\begin{verbatim}
+pixel remove_red(pixel p) {
+  return (p & 0xFF0000);
+}
+\end{verbatim}&
+\vspace{0.05in}
+Pixels are ints...
+
+\vspace{0.05in}\\
+\hline
+
+\begin{verbatim}
+int32_t x = (int32_t)P[pc+1];
+\end{verbatim}&
+\vspace{0.05in}
+I didn't know how to sign extend.\\
+
+\hline
+
+\begin{verbatim}
+if (s == B->point) is_in == true;
+\end{verbatim}&
+\vspace{0.05in}
+I wasn't paying attention to my code.\\
+
+\hline
+
+
+\end{tabular}
+\end{table}
+\newpage
+
+\begin{table}[h]
+\def\arraystretch{1.5}
+\begin{tabular}{|p{3.75in}|p{2.75in}|} \hline
+
+\begin{verbatim}
+stack temp = alloc(struct stack_header);
+\end{verbatim}&
+\vspace{0.05in}
+I looked in the stack.c file and thought I could just use the struct defined there.\\
+
+\hline
+
+\begin{verbatim}
+pc = pc + (o1 << 8) | o2;
+\end{verbatim}&
+Because the program counter was unsigned, I just assumed the offset should be, too.\\
+\hline
+
+\begin{verbatim}
+R->left = rope_new(`a');
+\end{verbatim}&
+\vspace{0.05in}
+
+I didn't realize that R could be NULL.\\
+
+\hline
+\begin{verbatim}
+int32_t* a = (int32_t*)(pop(S));
+*a = (char)(x & 0x7f);
+\end{verbatim}&
+\vspace{0.05in}
+I didn't realize that typecasting the RHS of the equation does not automatically typecast the LHS.\\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+
+\end{document}
